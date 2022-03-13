@@ -1,0 +1,76 @@
+<nav aria-label="breadcrumb mb-5">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item"><a routerLink="/registers">Bills</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Register</li>
+    </ol>
+</nav>
+<p-card>
+    <ng-template pTemplate="title">
+        Register Bill
+    </ng-template>
+    <form [formGroup]="form" (submit)="saveBill()">
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-6 form-group">
+                <label for="name">Name</label>
+                <input id="name" formControlName="name" type="text" pInputText>
+            </div>
+            <div class="col-12 md:col-3">
+                <label for="startDate">Billing Start Date</label>
+                <div class="p-inputgroup">
+                    <p-calendar formControlName="startDate" [showIcon]="true" inputId="startDate"></p-calendar>
+                </div>
+            </div>
+            <div class="col-12 md:col-3">
+                <label for="dueDate">Due Date</label>
+                <div class="p-inputgroup">
+                    <p-calendar formControlName="dueDate" [showIcon]="true" inputId="dueDate"></p-calendar>
+                </div>
+            </div>
+        </div>
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-4">
+                <label for="company">Company</label>
+                <input id="name" formControlName="company" type="text" pInputText>
+            </div>
+            <div class="col-12 md:col-4">
+                <label for="categories">Categories</label>
+                <p-dropdown id="categories" [options]="categories" formControlName="category" optionLabel="name">
+                </p-dropdown>
+            </div>
+            <div class="col-12 md:col-4">
+                <label for="type">Bill Type</label>
+                <p-dropdown id="type" [options]="billTypes" formControlName="type" optionLabel="name" optionValue="code">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="grid p-fluid">
+
+            <div class="col-12 md:col-3">
+                <label for="installments">Installments</label>
+                <p-dropdown id="installments" [options]="times" formControlName="portion" optionLabel="name" optionValue="portion">
+                </p-dropdown>
+            </div>
+            <div class="col-12 md:col-3">
+                <label for="value">Value</label>
+                <div class="p-inputgroup">
+                    <p-inputNumber formControlName="value" mode="currency" currency="BRL" locale="pt-BR"></p-inputNumber>
+                </div>
+            </div>
+        </div>
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-12">
+                <label for="barCode">Bar Code</label>
+                <input id="barCode" type="text" formControlName="barCode" pInputText>
+            </div>
+        </div>
+        <div style="margin-top: 20px;">
+            <button pButton type="submit" label="Save" class="p-button-sm" icon="pi pi-save" disabled="form.status.invalid">
+            </button>
+            <button style="float: right;" pButton type="button" label="Cancel" class="p-button-danger p-button-sm"
+                routerLink="/registers" icon="pi pi-times">
+            </button>
+        </div>
+    </form>
+    <p>Form Status: {{ form.status }}</p>
+</p-card>

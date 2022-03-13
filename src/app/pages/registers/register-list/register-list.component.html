@@ -1,0 +1,130 @@
+<nav aria-label="breadcrumb mb-5">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Bills</li>
+    </ol>
+</nav>
+<div>
+    <p-card>
+        <ng-template pTemplate="title">
+            Bills
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+            Register and List of Bills
+        </ng-template>
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-5">
+                <label for="name">Name</label>
+                <input id="name" type="text" pInputText placeholder="Type to filter by name">
+            </div>
+            <div class="col-12 md:col-3">
+                <label for="startDate">Start Date</label>
+                <p-calendar [(ngModel)]="startDate" [showIcon]="true" inputId="startDate"></p-calendar>
+            </div>
+            <div class="col-12 md:col-3">
+                <label for="endDate">End Date</label>
+                <p-calendar [(ngModel)]="endDate" [showIcon]="true" inputId="endDate"></p-calendar>
+            </div>
+            <div class="col-12 md:col-1">
+                <label for="paid">Paid</label><br>
+                <div style="margin-top: 7px;">
+                    <p-inputSwitch id="paid" [(ngModel)]="paid"></p-inputSwitch>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button pButton type="button" label="Search" class="p-button-sm" icon="pi pi-search"
+                style="margin-right: 10px;" routerLink="new">
+            </button>
+            <button style="margin-right: 10px;" pButton type="button" label="Clean Filter" class="p-button-sm" icon="pi pi-replay" routerLink="new">
+            </button>
+            <button pButton type="button" label="New Bill" class="p-button-sm" icon="pi pi-plus" routerLink="new">
+            </button>
+        </div>
+        <div style="margin-top: 15px;">
+            <p-table [value]="bills" responsiveLayout="scroll" [paginator]="true" [rows]="7" [rowsPerPageOptions]="[5,10,15,20]"
+           >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Name</th>
+                        <th>Value</th>
+                        <th>Category</th>
+                        <th>Company</th>
+                        <th>Type</th>
+                        <th>Due Date</th>
+                        <th [width]="300" style="text-align: center;">Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-bill>
+                    <tr>
+                        <td>{{bill.name}}</td>
+                        <td>{{bill.value}}</td>
+                        <td>{{bill.category.name}}</td>
+                        <td>{{bill.company}}</td>
+                        <td>{{bill.type}}</td>
+                        <td>{{bill.dueDate}}</td>
+                        <td style="text-align: center;">
+                            <button pButton pRipple type="button"
+                                class="p-button-rounded p-button-warning p-button-text" icon="pi pi-pencil" pTooltip="Edit Bill"
+                                [routerLink]="[1,'edit']">
+                            </button>
+                            <button pButton pRipple type="button" icon="pi pi-trash" pTooltip="Delete Bill"
+                                class="p-button-rounded p-button-danger p-button-text">
+                            </button>
+                            <button pButton pRipple type="button" icon="pi pi-search" pTooltip="View Bill"
+                                class="p-button-rounded p-button-text">
+                            </button>
+                            <button pButton pRipple type="button" icon="pi pi-wallet" pTooltip="Pay the bill"
+                                class="p-button-rounded p-button-text p-button-success">
+                            </button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </p-card>
+</div>
+<div style="margin-top: 10px;">
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-4">
+            <p-card styleClass="red-card">
+                <ng-template pTemplate="title">
+                    Total
+                </ng-template>
+                <ng-template pTemplate="subtitle">
+                    Total amount of bills.
+                </ng-template>
+                <div style="font-size: 2rem;">
+                    R$9,020.67
+                </div>
+            </p-card>
+        </div>
+        <div class="col-12 md:col-4">
+            <p-card styleClass="yellow-card">
+                <ng-template pTemplate="title">
+                    Total Pending
+                </ng-template>
+                <ng-template pTemplate="subtitle">
+                    Total amount of peding bills.
+                </ng-template>
+                <div style="font-size: 2rem;">
+                    R$6,802.00
+                </div>
+            </p-card>
+        </div>
+        <div class="col-12 md:col-4">
+            <p-card styleClass="green-card">
+                <ng-template pTemplate="title">
+                    Total Bills Paid
+                </ng-template>
+                <ng-template pTemplate="subtitle">
+                    Total amount of paid bills.
+                </ng-template>
+                <div style="font-size: 2rem;">
+                    R$4,002.00
+                </div>
+            </p-card>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,21 @@
+:host ::ng-deep .red-card.p-card {
+    .p-card-body {
+        padding: 1rem;
+        background: #ff9e9e;
+        box-sizing: border-box;
+      }
+}
+:host ::ng-deep .yellow-card.p-card {
+    .p-card-body {
+        padding: 1rem;
+        background: #e7d39b;
+        box-sizing: border-box;
+      }
+}
+:host ::ng-deep .green-card.p-card {
+    .p-card-body {
+        padding: 1rem;
+        background: #7ebb86;
+        box-sizing: border-box;
+      }
+}
