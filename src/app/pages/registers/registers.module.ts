@@ -13,12 +13,13 @@ import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
-import {InputSwitchModule} from 'primeng/inputswitch';
-import {InputMaskModule} from 'primeng/inputmask';
-import {DropdownModule} from 'primeng/dropdown';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { InputMaskModule } from 'primeng/inputmask';
+import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {InputNumberModule} from 'primeng/inputnumber';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api'
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     ReactiveFormsModule,
     InputNumberModule,
     ConfirmDialogModule
-  ]
+  ],
+  providers: [ConfirmationService]
 })
 export class RegistersModule { }

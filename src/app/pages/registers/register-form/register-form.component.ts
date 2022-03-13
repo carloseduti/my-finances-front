@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { param } from 'jquery';
+import { switchMap } from 'rxjs';
 import toastr from 'toastr';
 import { BillService } from '../../services/bill.service';
 import { CategoryService } from '../../services/category.service';
@@ -11,20 +14,20 @@ import { CategoryService } from '../../services/category.service';
 })
 export class RegisterFormComponent implements OnInit {
 
-  public categories: any[] = []
-  public times: any[] = []
-  public timeSelect: any;
-  public val: number;
-  public dueDate: Date;
-  public fixedBill: boolean;
-  public billTypes: any[] = [];
-
-  public form: FormGroup;
+  categories: any[] = []
+  times: any[] = []
+  billTypes: any[] = [];
+  submittingForm: Boolean = false;
+  currentAction: string;
+  pageTitle: string;
+  registerForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private categoryService: CategoryService,
-    private billService: BillService
+    private billService: BillService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
 
     this.times = [
@@ -52,30 +55,37 @@ export class RegisterFormComponent implements OnInit {
   ngOnInit(): void {
     this.setForm();
     this.findCategories();
+    this.setCurrentAction();
+    this.loadBill();
   }
 
-  private setForm() {
-    const group = {
-      name: [null, Validators.required],
-      value: [null, Validators.required],
-      category: [null, Validators.required],
-      company: [null, Validators.required],
-      type: [null, Validators.required],
-      portion: [null, Validators.required],
-      startDate: [null, Validators.required],
-      dueDate: [null, Validators.required],
-      registrationDate: [new Date],
-      barCode: [null]
-    };
-    this.form = this.formBuilder.group(group);
+  submitForm() {
+    this.submittingForm = true;
+    if (this.currentAction == 'new') {
+      this.saveBill();
+    } else {
+      this.updateBill();
+    }
   }
 
-  saveBill() {
-    console.log(this.form.getRawValue())
-    this.billService.save(this.form.getRawValue()).subscribe(
+  private saveBill() {
+    this.billService.save(this.registerForm.getRawValue()).subscribe(
       () => {
-        toastr.success('Bill save successfully!')
-        this.ngOnInit();
+        toastr.success('Bill save successfully.')
+        this.router.navigateByUrl('registers');
+        this.findCategories();
+        this.submittingForm = false;
+      }
+    )
+  }
+
+  private updateBill() {
+    this.billService.update(this.registerForm.getRawValue()).subscribe(
+      () => {
+        toastr.success('Bill updated successfully.')
+        this.router.navigateByUrl('registers');
+        this.findCategories();
+        this.submittingForm = false;
       }
     )
   }
@@ -88,4 +98,44 @@ export class RegisterFormComponent implements OnInit {
     )
   }
 
+  //PRIVATE METHODS
+  private setForm() {
+    const group = {
+      id: [null],
+      name: [null, Validators.required],
+      value: [null, Validators.required],
+      category: [null, Validators.required],
+      company: [null, Validators.required],
+      type: [null, Validators.required],
+      portion: [null, Validators.required],
+      startDate: [null, Validators.required],
+      dueDate: [null, Validators.required],
+      registrationDate: [new Date],
+      barCode: [null]
+    };
+    this.registerForm = this.formBuilder.group(group);
+  }
+
+  private setCurrentAction() {
+    if (this.route.snapshot.url[0].path == "new") {
+      this.currentAction = "new"
+      this.pageTitle = 'Register Bill'
+    } else {
+      this.currentAction = "edit"
+      this.pageTitle = 'Editing Bill'
+
+    }
+  }
+
+  private loadBill() {
+    if (this.currentAction == "edit") {
+      this.route.paramMap.pipe(
+        switchMap(params => this.billService.findById(Number(params.get("id"))))
+      ).subscribe(
+        (bill) => {
+          this.registerForm.patchValue(bill);
+        }
+      )
+    }
+  }
 }

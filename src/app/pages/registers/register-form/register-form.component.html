@@ -7,18 +7,26 @@
 </nav>
 <p-card>
     <ng-template pTemplate="title">
-        Register Bill
+        {{pageTitle}}
     </ng-template>
-    <form [formGroup]="form" (submit)="saveBill()">
+    <form [formGroup]="registerForm" (submit)="submitForm()">
         <div class="grid p-fluid">
             <div class="col-12 md:col-6 form-group">
                 <label for="name">Name</label>
                 <input id="name" formControlName="name" type="text" pInputText>
+                <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched"
+                    style="color: #df5a5a;">
+                    Name is required.
+                </div>
             </div>
             <div class="col-12 md:col-3">
                 <label for="startDate">Billing Start Date</label>
                 <div class="p-inputgroup">
                     <p-calendar formControlName="startDate" [showIcon]="true" inputId="startDate"></p-calendar>
+                </div>
+                <div *ngIf="registerForm.get('startDate')?.invalid && registerForm.get('startDate')?.touched"
+                    style="color: #df5a5a;">
+                    Start Date is required.
                 </div>
             </div>
             <div class="col-12 md:col-3">
@@ -26,35 +34,61 @@
                 <div class="p-inputgroup">
                     <p-calendar formControlName="dueDate" [showIcon]="true" inputId="dueDate"></p-calendar>
                 </div>
+                <div *ngIf="registerForm.get('dueDate')?.invalid && registerForm.get('dueDate')?.touched"
+                    style="color: #df5a5a;">
+                    Due Date is required.
+                </div>
             </div>
         </div>
         <div class="grid p-fluid">
             <div class="col-12 md:col-4">
                 <label for="company">Company</label>
                 <input id="name" formControlName="company" type="text" pInputText>
+                <div *ngIf="registerForm.get('company')?.invalid && registerForm.get('company')?.touched"
+                    style="color: #df5a5a;">
+                    Company is required.
+                </div>
             </div>
             <div class="col-12 md:col-4">
                 <label for="categories">Categories</label>
                 <p-dropdown id="categories" [options]="categories" formControlName="category" optionLabel="name">
                 </p-dropdown>
+                <div *ngIf="registerForm.get('category')?.invalid && registerForm.get('category')?.touched"
+                    style="color: #df5a5a;">
+                    Category is required.
+                </div>
             </div>
             <div class="col-12 md:col-4">
                 <label for="type">Bill Type</label>
-                <p-dropdown id="type" [options]="billTypes" formControlName="type" optionLabel="name" optionValue="code">
+                <p-dropdown id="type" [options]="billTypes" formControlName="type" optionLabel="name"
+                    optionValue="code">
                 </p-dropdown>
+                <div *ngIf="registerForm.get('type')?.invalid && registerForm.get('type')?.touched"
+                    style="color: #df5a5a;">
+                    Type is required.
+                </div>
             </div>
         </div>
         <div class="grid p-fluid">
-
             <div class="col-12 md:col-3">
                 <label for="installments">Installments</label>
-                <p-dropdown id="installments" [options]="times" formControlName="portion" optionLabel="name" optionValue="portion">
+                <p-dropdown id="installments" [options]="times" formControlName="portion" optionLabel="name"
+                    optionValue="portion">
                 </p-dropdown>
+                <div *ngIf="registerForm.get('portion')?.invalid && registerForm.get('portion')?.touched"
+                    style="color: #df5a5a;">
+                    Installments is required.
+                </div>
             </div>
             <div class="col-12 md:col-3">
                 <label for="value">Value</label>
                 <div class="p-inputgroup">
-                    <p-inputNumber formControlName="value" mode="currency" currency="BRL" locale="pt-BR"></p-inputNumber>
+                    <p-inputNumber formControlName="value" mode="currency" currency="BRL" locale="pt-BR">
+                    </p-inputNumber>
+                </div>
+                <div *ngIf="registerForm.get('value')?.invalid && registerForm.get('value')?.touched"
+                    style="color: #df5a5a;">
+                    Value is required.
                 </div>
             </div>
         </div>
@@ -65,12 +99,12 @@
             </div>
         </div>
         <div style="margin-top: 20px;">
-            <button pButton type="submit" label="Save" class="p-button-sm" icon="pi pi-save" disabled="form.status.invalid">
+            <button [disabled]="registerForm.invalid" pButton type="submit" label="Save" class="p-button-sm"
+                icon="pi pi-save">
             </button>
             <button style="float: right;" pButton type="button" label="Cancel" class="p-button-danger p-button-sm"
                 routerLink="/registers" icon="pi pi-times">
             </button>
         </div>
     </form>
-    <p>Form Status: {{ form.status }}</p>
 </p-card>

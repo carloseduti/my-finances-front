@@ -36,14 +36,15 @@
             <button pButton type="button" label="Search" class="p-button-sm" icon="pi pi-search"
                 style="margin-right: 10px;" routerLink="new">
             </button>
-            <button style="margin-right: 10px;" pButton type="button" label="Clean Filter" class="p-button-sm" icon="pi pi-replay" routerLink="new">
+            <button style="margin-right: 10px;" pButton type="button" label="Clean Filter" class="p-button-sm"
+                icon="pi pi-replay" routerLink="new">
             </button>
             <button pButton type="button" label="New Bill" class="p-button-sm" icon="pi pi-plus" routerLink="new">
             </button>
         </div>
         <div style="margin-top: 15px;">
-            <p-table [value]="bills" responsiveLayout="scroll" [paginator]="true" [rows]="7" [rowsPerPageOptions]="[5,10,15,20]"
-           >
+            <p-table [value]="bills" responsiveLayout="scroll" [paginator]="true" [rows]="7"
+                [rowsPerPageOptions]="[5,10,15,20]">
                 <ng-template pTemplate="header">
                     <tr>
                         <th>Name</th>
@@ -58,24 +59,26 @@
                 <ng-template pTemplate="body" let-bill>
                     <tr>
                         <td>{{bill.name}}</td>
-                        <td>{{bill.value}}</td>
+                        <td>R${{bill.value}},00</td>
                         <td>{{bill.category.name}}</td>
                         <td>{{bill.company}}</td>
                         <td>{{bill.type}}</td>
                         <td>{{bill.dueDate}}</td>
                         <td style="text-align: center;">
                             <button pButton pRipple type="button"
-                                class="p-button-rounded p-button-warning p-button-text" icon="pi pi-pencil" pTooltip="Edit Bill"
-                                [routerLink]="[1,'edit']">
+                                class="p-button-rounded p-button-warning p-button-text p-button-sm" icon="pi pi-pencil"
+                                pTooltip="Edit Bill" [routerLink]="[bill?.id,'edit']">
                             </button>
                             <button pButton pRipple type="button" icon="pi pi-trash" pTooltip="Delete Bill"
-                                class="p-button-rounded p-button-danger p-button-text">
+                                class="p-button-rounded p-button-danger p-button-text p-button-sm"
+                                (click)="deleteBill(bill?.id)">
                             </button>
                             <button pButton pRipple type="button" icon="pi pi-search" pTooltip="View Bill"
-                                class="p-button-rounded p-button-text">
+                                class="p-button-rounded p-button-text p-button-sm">
                             </button>
                             <button pButton pRipple type="button" icon="pi pi-wallet" pTooltip="Pay the bill"
-                                class="p-button-rounded p-button-text p-button-success">
+                                (click)="payTheBill(bill?.id)"
+                                class="p-button-rounded p-button-text p-button-success p-button-sm">
                             </button>
                         </td>
                     </tr>
@@ -126,5 +129,5 @@
             </p-card>
         </div>
     </div>
-
+    <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 </div>
