@@ -58,12 +58,12 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-bill>
                     <tr>
-                        <td>{{bill.name}}</td>
-                        <td>R${{bill.value}},00</td>
-                        <td>{{bill.category.name}}</td>
-                        <td>{{bill.company}}</td>
-                        <td>{{bill.type}}</td>
-                        <td>{{bill.dueDate}}</td>
+                        <td>{{bill?.name}}</td>
+                        <td>R${{bill?.value}},00</td>
+                        <td>{{bill?.category?.name}}</td>
+                        <td>{{bill?.company}}</td>
+                        <td>{{bill?.type}}</td>
+                        <td>{{bill?.dueDate}}</td>
                         <td style="text-align: center;">
                             <button pButton pRipple type="button"
                                 class="p-button-rounded p-button-warning p-button-text p-button-sm" icon="pi pi-pencil"
@@ -73,8 +73,22 @@
                                 class="p-button-rounded p-button-danger p-button-text p-button-sm"
                                 (click)="deleteBill(bill?.id)">
                             </button>
-                            <button pButton pRipple type="button" icon="pi pi-search" pTooltip="View Bill"
+                            <button pButton pRipple type="button" (click)="showResponsiveDialog()" icon="pi pi-search" pTooltip="View Bill"
                                 class="p-button-rounded p-button-text p-button-sm">
+                            <!--Inicio table Search-->
+                              <p-dialog header="Nome: {{bill?.name}}" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}" [style]="{width: '30vw'}"
+                              [draggable]="false" [resizable]="false">
+                                <p-table [value]="bills" >
+                                  <ng-template pTemplate="header" >
+                                    <tr style="text-align: left;"><h6>Value: </h6> <td>{{bill?.value}}</td></tr>
+                                    <tr style="text-align: left;"><h6>Category: </h6> <td>{{bill?.category?.name}}</td></tr>
+                                    <tr style="text-align: left;"><h6>Company: </h6> <td>{{bill?.company}}</td></tr>
+                                    <tr style="text-align: left;"><h6>Type: </h6> <td>{{bill?.type}}</td></tr>
+                                    <tr style="text-align: left;"><h6>Due Date: </h6> <td>{{bill?.dueDate}}</td></tr>
+                                  </ng-template>
+                                </p-table>
+                              </p-dialog>
+                            <!--Fim table Search-->
                             </button>
                             <button pButton pRipple type="button" icon="pi pi-wallet" pTooltip="Pay the bill"
                                 (click)="payTheBill(bill?.id)"

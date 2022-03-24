@@ -19,13 +19,11 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api'
+import { ConfirmationService } from 'primeng/api';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
-  declarations: [
-    RegisterFormComponent,
-    RegisterListComponent
-  ],
+  declarations: [RegisterFormComponent, RegisterListComponent],
   imports: [
     CommonModule,
     RegistersRoutingModule,
@@ -45,8 +43,9 @@ import { ConfirmationService } from 'primeng/api'
     DropdownModule,
     ReactiveFormsModule,
     InputNumberModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    DialogModule
   ],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService],
 })
-export class RegistersModule { }
+export class RegistersModule {}
