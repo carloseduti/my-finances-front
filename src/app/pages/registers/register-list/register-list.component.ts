@@ -9,11 +9,13 @@ import toastr from 'toastr';
   styleUrls: ['./register-list.component.scss'],
 })
 export class RegisterListComponent implements OnInit {
-  public bills: any[] = [];
-  public startDate: Date;
-  public endDate: Date;
-  public paid: Boolean;
+
+  bills: any[] = [];
+  startDate: Date;
+  endDate: Date;
+  paid: Boolean;
   displayResponsive: boolean;
+  billSelected: any;
 
 
   constructor(
@@ -53,10 +55,9 @@ export class RegisterListComponent implements OnInit {
     });
   }
 
-  showResponsiveDialog() {
+  showResponsiveDialog(bill : any) {
     this.displayResponsive = true;
+    this.billSelected = bill;
   }
-
-
 
 }
