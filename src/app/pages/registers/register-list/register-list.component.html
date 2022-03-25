@@ -131,17 +131,29 @@
         </div>
     </div>
     <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-    <p-dialog header="Bill Description" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}" [style]="{width: '50vw'}"
+    <p-dialog header="NAME:  {{billSelected?.name}}"  [(visible)]="displayResponsive" [breakpoints]="{'960px': '95vw'}" [style]="{width: '35vw'}"
         [draggable]="false" [resizable]="false">
+
         <div class="grid p-fluid">
-            <div class="col-12 md:col-4">
-                <h5>Name</h5>
-                <a>{{billSelected?.name}}</a>
-            </div>
-            <div class="col-12 md:col-2">
-                <h5>Value</h5>
+            <div class="col-10 md:col-5">
+                <h5>Value: </h5>
                 <a>{{billSelected?.value}}</a>
+                <h5>Category: </h5>
+                <a>{{billSelected?.category?.name}}</a>
+                <h5>company: </h5>
+                <a>{{billSelected?.company}}</a>
+            </div>
+            <div class="col-10 md:col-5">
+
+                <h5>type: </h5>
+                <a>{{billSelected?.type}}</a>
+                <h5>Due Date: </h5>
+                <a>{{billSelected?.dueDate}}</a>
+                <h5>Payment status: </h5>
+                <a>Pago</a>
             </div>
         </div>
+
     </p-dialog>
+
 </div>

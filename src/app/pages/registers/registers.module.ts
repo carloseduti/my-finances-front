@@ -21,6 +21,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import {DialogModule} from 'primeng/dialog';
+import {PanelModule} from 'primeng/panel';
+import {DividerModule} from 'primeng/divider';
 
 @NgModule({
   declarations: [RegisterFormComponent, RegisterListComponent],
@@ -44,7 +46,9 @@ import {DialogModule} from 'primeng/dialog';
     ReactiveFormsModule,
     InputNumberModule,
     ConfirmDialogModule,
-    DialogModule
+    DialogModule,
+    PanelModule,
+    DividerModule
   ],
   providers: [ConfirmationService],
 })
