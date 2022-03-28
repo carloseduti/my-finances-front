@@ -18,8 +18,6 @@ export class LoginFormComponent implements OnInit {
   }
 
   signIn() {
-    console.log(this.login)
-    console.log(this.password)
     if (this.login == 'admin' && this.password == '123456') {
       toastr.success('Login successfully.')
       this.router.navigateByUrl('reports')
