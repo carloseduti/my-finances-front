@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-  <a class="navbar-brand" routerLink="/">MyFinance$</a>
+  <a class="navbar-brand" routerLink="/reports">MyFinance$</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <div *ngIf="router.url !== '/login'" class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active" routerLinkActive="active">
         <a class="nav-link" routerLink="/reports">Reports</a>
@@ -15,7 +15,6 @@
     </ul>
   </div>
 </nav>
-
 <div class="container-fluid">
   <router-outlet></router-outlet>
 </div>
