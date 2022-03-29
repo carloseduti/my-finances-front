@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { getAuth } from 'firebase/auth';
 
 @Component({
   selector: 'app-report-dashboard',
@@ -9,10 +10,12 @@ export class ReportDashboardComponent implements OnInit {
 
   basicData: any;
   basicOptions: any;
+  userAuth = getAuth();
 
   constructor() { }
 
   ngOnInit(): void {
+
     this.basicData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [

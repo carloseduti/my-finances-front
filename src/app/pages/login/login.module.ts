@@ -10,6 +10,7 @@ import { CardModule } from 'primeng/card';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'
 
+
 @NgModule({
   declarations: [
     LoginFormComponent
@@ -22,7 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms'
     InputTextModule,
     CardModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class LoginModule { }

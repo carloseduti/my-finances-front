@@ -1,6 +1,6 @@
-import { Location, LocationStrategy } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +10,9 @@ import { Router } from '@angular/router';
 export class AppComponent  {
   title = 'my-finances';
   
-  constructor(public router: Router) {}
+  constructor(public router: Router, private auth: AuthenticationService) {}
+
+  signOut(){
+    this.auth.signOut();
+  }
 }

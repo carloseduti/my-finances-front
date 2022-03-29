@@ -14,6 +14,18 @@
       </li>
     </ul>
   </div>
+  <div *ngIf="router.url !== '/login'">
+    <button 
+      pButton 
+      type="button" 
+      icon="pi pi-sign-out" 
+      (click)="signOut()"
+      pTooltip="Logout"
+      class=" p-button-rounded"
+      >
+    </button>
+  </div>
+
 </nav>
 <div class="container-fluid">
   <router-outlet></router-outlet>

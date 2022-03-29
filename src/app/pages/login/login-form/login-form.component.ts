@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import toastr from 'toastr';
 
 @Component({
@@ -12,18 +13,14 @@ export class LoginFormComponent implements OnInit {
   login: String;
   password: String;
 
-  constructor(public router: Router) { }
+  constructor(public router: Router,
+    private auth: AuthenticationService) { }
 
   ngOnInit(): void {
   }
 
   signIn() {
-    if (this.login == 'admin' && this.password == '123456') {
-      toastr.success('Login successfully.')
-      this.router.navigateByUrl('reports')
-    } else {
-      toastr.error('Username or Password Incorrect ')
-    }
+    this.auth.signIn();
   }
 
 }
