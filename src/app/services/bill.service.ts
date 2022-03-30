@@ -16,8 +16,8 @@ export class BillService {
     return this.http.post(this.baseUrl, bill);
   }
 
-  findAll(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/all`);
+  findAll(uui: any): Observable<any> {
+    return this.http.get(`${this.baseUrl}/all/${uui}`);
   }
 
   findById(id: number): Observable<any> {

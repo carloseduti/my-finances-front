@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { GoogleAuthProvider } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { getAuth } from 'firebase/auth';
 import toastr from 'toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+
+
 
   constructor(
     private fireAuth: AngularFireAuth,
@@ -28,5 +31,9 @@ export class AuthenticationService {
     return this.fireAuth.signOut().then(() => {
       this.router.navigateByUrl('login')
     });
+  }
+
+  getIdUser() {
+    return getAuth()?.currentUser?.uid;
   }
 }

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { param } from 'jquery';
 import { switchMap } from 'rxjs';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { CategoryService } from 'src/app/services/category.service';
 import toastr from 'toastr';
-import { BillService } from '../../services/bill.service';
-import { CategoryService } from '../../services/category.service';
+import { BillService } from '../../../services/bill.service';
 
 @Component({
   selector: 'app-register-form',
@@ -27,7 +27,8 @@ export class RegisterFormComponent implements OnInit {
     private categoryService: CategoryService,
     private billService: BillService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private auth: AuthenticationService
   ) {
 
     this.times = [
@@ -102,6 +103,7 @@ export class RegisterFormComponent implements OnInit {
   private setForm() {
     const group = {
       id: [null],
+      uuid: [this.auth.getIdUser()],
       name: [null, Validators.required],
       value: [null, Validators.required],
       category: [null, Validators.required],

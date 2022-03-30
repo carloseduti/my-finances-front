@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
-import { BillService } from '../../services/bill.service';
+import { BillService } from '../../../services/bill.service';
 import toastr from 'toastr';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-register-list',
@@ -20,7 +21,8 @@ export class RegisterListComponent implements OnInit {
 
   constructor(
     private billService: BillService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private auth: AuthenticationService
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class RegisterListComponent implements OnInit {
   }
 
   findBills() {
-    this.billService.findAll().subscribe((res) => {
+    this.billService.findAll(this.auth.getIdUser()).subscribe((res) => {
       this.bills = res;
     });
   }
